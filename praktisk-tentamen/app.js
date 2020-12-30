@@ -10,34 +10,7 @@ function Land(){
     this.tid = newDate;
 }
 
-// let x = new Date();
-// let currentTimeZoneOffsetInHours = Date.getTimezoneOffset() / 60;
-
-/*     let x = new Date();
-    let currentTimeZoneOffsetInHours = x.getTimezoneOffset() / 60; */
-/*     d = new Date();
-    localTime = d.getTime();
-    localOffset = d.getTimezoneOffset() * 60000;
-    utc = localTime + localOffset;
-    offset = timezones;
-    bombay = utc + (3600000*offset); */
-
-// function Date(){
-    // let x = new Date();
-    // let currentTimeZoneOffsetInHours = Date.getTimezoneOffset() / 60;
-    // d = new Date();
-    // localTime = d.getTime();
-    // localOffset = d.getTimezoneOffset() * 60000;
-    // utc = localTime + localOffset;
-    // offset = timezones;
-    // bombay = utc + (3600000*offset);
-// }
-
-
-// console.log(timenow)
-
 let url = '';
-// let timezones = '';
 let section = document.querySelectorAll('section')
 let img = document.querySelectorAll('img')
 let h1 = document.querySelectorAll('h1')
@@ -64,9 +37,6 @@ for(i=0; i<3; i++){
     div.flag = flag;
     div.time = timeValue;
 
-
-    // Date(timeValue)
-    // const utcDate1 = new Date(Date.UTC(timeValue));
     let val = section[i];
     let valImg = img[i];
     let valh1 = h1[i];
@@ -74,13 +44,14 @@ for(i=0; i<3; i++){
 
     valh1.innerHTML = nameValue;
     valImg.src = flag;
-    // valh3.innerHTML = timeValue;
 
+    //Drar ner utc tid till bara nummer
     let time1 = timeValue
     let time2 = time1.substring(3)
     let time3 = parseFloat(time2);
     time3 = time3 || 0
 
+    //Hämtar lokal tid och dess tidsskillnad för att sedan lägga ihop för att få tiden för specifika landet
     dateNow = new Date();
     localTime = dateNow.getTime();
     localOffset = dateNow.getTimezoneOffset() * 60000;
@@ -90,8 +61,7 @@ for(i=0; i<3; i++){
     newDate = new Date(timethere);
     div.tid = newDate
 
+    //Lägger in tidzone och tid för specifikt land
     valh3.innerHTML = timeValue + '<br>' + '<br>' + 'Tiden här är: ' + newDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-
-    console.log(time3, time1, time2, timeValue);
 }
 }
