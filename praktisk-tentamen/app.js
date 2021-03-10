@@ -7,7 +7,6 @@ function Land(){
     this.name = name;
     this.flag = url;
     this.time = timezones;
-    this.tid = newDate;
 }
 
 let url = '';
@@ -52,6 +51,7 @@ for(i=0; i<3; i++){
     time3 = time3 || 0
 
     //Hämtar lokal tid och dess tidsskillnad för att sedan lägga ihop för att få tiden för specifika landet
+    Land.prototype.newDate = newDate;
     dateNow = new Date();
     localTime = dateNow.getTime();
     localOffset = dateNow.getTimezoneOffset() * 60000;
