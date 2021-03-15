@@ -3,6 +3,7 @@ let newDate;
 let landArray = [];
 let landString = {};
 
+
 function Land(){
     this.name = name;
     this.flag = url;
@@ -21,6 +22,8 @@ fetch('https://restcountries.eu/rest/v2/all?fields=name;flag;timezones')
 .then(data => initialize(data))
 .catch(error => console.log("Error:", error))
 
+
+
 //Dela ut värden
 function initialize(countriesData) {
 for(i=0; i<3; i++){
@@ -34,24 +37,31 @@ for(i=0; i<3; i++){
 
     div.name = nameValue;
     div.flag = flag;
-    div.time = timeValue;
 
     let val = section[i];
     let valImg = img[i];
     let valh1 = h1[i];
-    let valh3 = h3[i];
 
     valh1.innerHTML = nameValue;
     valImg.src = flag;
 
-    //Drar ner utc tid till bara nummer
+    let newCountry = new Land(timeValue)
+    newCountry.timeCal(timeValue, [i])
+}
+}
+
+Land.prototype.timeCal = function(timeValue, [i]) {
+    console.log(timeValue)
+    console.log([i])
+    let div = new Land();
+    div.time = timeValue;
+    let valh3 = h3[i];
+
     let time1 = timeValue
     let time2 = time1.substring(3)
     let time3 = parseFloat(time2);
     time3 = time3 || 0
 
-    //Hämtar lokal tid och dess tidsskillnad för att sedan lägga ihop för att få tiden för specifika landet
-    Land.prototype.newDate = newDate;
     dateNow = new Date();
     localTime = dateNow.getTime();
     localOffset = dateNow.getTimezoneOffset() * 60000;
@@ -61,7 +71,5 @@ for(i=0; i<3; i++){
     newDate = new Date(timethere);
     div.tid = newDate
 
-    //Lägger in tidzone och tid för specifikt land
     valh3.innerHTML = timeValue + '<br>' + '<br>' + 'Tiden här är: ' + newDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-}
 }
